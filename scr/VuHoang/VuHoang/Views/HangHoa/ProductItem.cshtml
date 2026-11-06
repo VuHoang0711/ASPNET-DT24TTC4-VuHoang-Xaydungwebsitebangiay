@@ -1,0 +1,99 @@
+@model IEnumerable<CakeShop.ModelsView.HangHoaVM>
+
+@if (Model != null && Model.Any())
+{
+    foreach (var item in Model)
+    {
+        <div class="col-12 col-sm-6 col-lg-4 d-flex align-items-stretch mb-4">
+            <div class="teahouse-product-card w-100">
+                <!-- Product Image -->
+                <div class="product-img-box">
+                    <a asp-action="Detail" asp-controller="HangHoa" asp-route-id="@item.MaHh" class="w-100 h-100 d-block">
+                        <img src="~/Hinh/HangHoa/@item.Hinh" alt="@item.TenHH" onerror="this.src='/Hinh/HangHoa/nike-af1-07.jpg';" />
+                    </a>
+
+                    <!-- Product Badge -->
+                    @if (item.Giamgia > 0)
+                    {
+                        <span class="product-badge-pill">
+                            GIẢM GIÁ
+                        </span>
+                    }
+                    else
+                    {
+                        var badgeText = (item.MaHh % 3) switch
+                        {
+                            1 => "BÁN CHẠY",
+                            2 => "MỚI",
+                            _ => "HOT"
+                        };
+                        <span class="product-badge-pill product-badge-seller">
+                            @badgeText
+                        </span>
+                    }
+
+                    <!-- Favourite Button -->
+                    <a asp-action="Detail" asp-controller="HangHoa" asp-route-id="@item.MaHh" class="product-fav-icon" title="Xem chi tiết">
+                        <i class="fa fa-heart-o"></i>
+                    </a>
+                </div>
+
+                <!-- Product Description -->
+                <div class="product-card-body">
+                    <span class="product-cat-tag">@(item.TenLoai ?? "Giày Thể Thao")</span>
+                    <a asp-action="Detail" asp-controller="HangHoa" asp-route-id="@item.MaHh">
+                        <h5 class="product-card-title" title="@item.TenHH">@item.TenHH</h5>
+                    </a>
+
+                    <!-- Rating -->
+                    <div class="product-rating">
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <span>(4.9)</span>
+                    </div>
+
+                    <!-- Price -->
+                    <div class="product-price-row">
+                        @if (item.Giamgia > 0)
+                        {
+                            <span class="product-current-price">@((item.DonGia - item.Giamgia).ToString("#,##0"))đ</span>
+                            <span class="product-old-price">@item.DonGia.ToString("#,##0")đ</span>
+                        }
+                        else
+                        {
+                            <span class="product-current-price">@item.DonGia.ToString("#,##0")đ</span>
+                        }
+                    </div>
+
+                    <!-- Quick Spec Options -->
+                    <div class="product-quick-size">
+                        <span class="size-pill">@(string.IsNullOrEmpty(item.MoTaNgan) ? "Size 36-44" : item.MoTaNgan.Split('|')[0].Trim())</span>
+                        <span class="size-pill">Fullbox</span>
+                        <span class="size-pill" style="background:#FFF1F0; color:#FF4D2D; border-color:#FECACA;">Đổi size 30N</span>
+                    </div>
+
+                    <!-- Action Button -->
+                    <a asp-action="AddToCart" asp-controller="Cart" asp-route-id="@item.MaHh" class="btn-card-addcart">
+                        <i class="fa fa-plus-circle"></i> THÊM VÀO GIỎ
+                    </a>
+                </div>
+            </div>
+        </div>
+    }
+}
+else
+{
+    <div class="col-12 text-center py-5">
+        <div class="p-5 bg-white rounded shadow-sm border">
+            <i class="fas fa-running fa-3x text-muted mb-3"></i>
+            <h5 class="font-weight-bold">Không tìm thấy mẫu giày phù hợp với bộ lọc hiện tại</h5>
+            <p class="text-muted small mb-3">Hãy thử chọn lại danh mục, thương hiệu hoặc khoảng giá khác nhé.</p>
+            <a asp-controller="HangHoa" asp-action="Index" class="btn-teahouse px-4 py-2">
+                XEM TẤT CẢ GIÀY
+            </a>
+        </div>
+    </div>
+}

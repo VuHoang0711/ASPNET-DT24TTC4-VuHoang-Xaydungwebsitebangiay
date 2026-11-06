@@ -1,0 +1,159 @@
+@model IEnumerable<CakeShop.ModelsView.CartItem>
+@{
+    ViewData["Title"] = "Giỏ Hàng Giày Thể Thao";
+}
+
+<div class="container py-5">
+    <!-- Header -->
+    <div class="text-center mb-5">
+        <span class="badge badge-pill px-3 py-2 mb-2" style="background: var(--brand-peach-soft); color: var(--brand-peach); font-weight: 700; font-size: 13px;">
+            ĐƠN HÀNG CỦA BẠN
+        </span>
+        <h1 class="display-6 font-weight-bold" style="color: var(--brand-brown-dark);">GIỎ HÀNG GIÀY THỂ THAO</h1>
+        <p class="text-muted">Kiểm tra lại size giày, phối màu và số lượng trước khi tiến hành đặt hàng</p>
+    </div>
+
+    @if (Model != null && Model.Any())
+    {
+        <div class="row g-4">
+            <!-- Left: Cart Items List -->
+            <div class="col-12 col-lg-8">
+                <div class="cart-table-wrapper p-3 p-md-4">
+                    <div class="table-responsive">
+                        <table class="table teahouse-table mb-0">
+                            <thead>
+                                <tr>
+                                    <th scope="col" style="border-top: none;">Mẫu Giày</th>
+                                    <th scope="col" style="border-top: none;">Đơn Giá</th>
+                                    <th scope="col" style="border-top: none;" class="text-center">Số Lượng</th>
+                                    <th scope="col" style="border-top: none;" class="text-right">Thành Tiền</th>
+                                    <th scope="col" style="border-top: none;" class="text-center">Xóa</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <img src="~/Hinh/HangHoa/@item.Hinh"
+                                                     class="rounded-circle mr-3"
+                                                     style="width: 70px; height: 70px; object-fit: cover; border: 2px solid var(--border-soft);"
+                                                     alt="@item.TenHH"
+                                                     onerror="this.src='/Hinh/HangHoa/nike-af1-07.jpg';" />
+                                                <div>
+                                                    <a asp-action="Detail" asp-controller="HangHoa" asp-route-id="@item.MaHh" class="font-weight-bold" style="color: var(--brand-brown-dark); font-size: 16px;">
+                                                        @item.TenHH
+                                                    </a>
+                                                    <div class="small text-muted mt-1">
+                                                        <span class="badge badge-light border" style="color: #111827;">Size: @(string.IsNullOrEmpty(item.KichCo) ? "41" : item.KichCo)</span>
+                                                        <span class="badge badge-light border" style="color: #4B5563;">@(string.IsNullOrEmpty(item.MauSac) ? "Phối màu Tiêu chuẩn" : item.MauSac)</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <span class="font-weight-bold" style="color: var(--brand-brown);">
+                                                @((item.DonGia - item.GiamGia).ToString("#,##0"))đ
+                                            </span>
+                                        </td>
+                                        <td class="text-center">
+                                            <div class="quantity-control d-inline-flex">
+                                                <a class="btn-qty" asp-action="MinusQuantity" asp-controller="Cart" asp-route-id="@item.MaHh" title="Giảm số lượng">
+                                                    <i class="fa fa-minus"></i>
+                                                </a>
+                                                <span class="qty-input d-flex align-items-center justify-content-center">@item.SoLuong</span>
+                                                <a class="btn-qty" asp-action="AddQuantity" asp-controller="Cart" asp-route-id="@item.MaHh" title="Tăng số lượng">
+                                                    <i class="fa fa-plus"></i>
+                                                </a>
+                                            </div>
+                                        </td>
+                                        <td class="text-right">
+                                            <span class="font-weight-bold" style="color: var(--brand-peach); font-size: 16px;">
+                                                @item.ThanhTien.ToString("#,##0")đ
+                                            </span>
+                                        </td>
+                                        <td class="text-center">
+                                            <a asp-action="RemoveCart" asp-controller="Cart" asp-route-id="@item.MaHh" class="btn btn-sm text-danger" title="Xóa sản phẩm này" onclick="return confirm('Bạn có chắc muốn bỏ đôi giày này khỏi giỏ hàng?');">
+                                                <i class="fa fa-trash-o fa-lg"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Continue Shopping Button -->
+                    <div class="p-3 border-top mt-3 d-flex justify-content-between align-items-center">
+                        <a asp-controller="HangHoa" asp-action="Index" class="btn-teahouse-outline" style="font-size: 13px; padding: 10px 20px;">
+                            <i class="fa fa-arrow-left"></i> TIẾP TỤC CHỌN GIÀY
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Coupon Section -->
+                <div class="p-4 rounded mb-4" style="background:#FFFFFF; border:1px solid var(--border-soft); box-shadow: var(--shadow-sm);">
+                    <h6 class="font-weight-bold mb-3" style="color: var(--brand-brown-dark);">
+                        <i class="fa fa-gift text-warning mr-1"></i> Mã Giảm Giá / Voucher Khuyến Mãi
+                    </h6>
+                    <div class="d-flex flex-wrap gap-2">
+                        <input type="text" class="form-control mr-2 mb-2" style="max-width: 280px;" placeholder="Nhập mã ưu đãi (ví dụ: SNEAKER200)" />
+                        <button class="btn btn-teahouse-peach mb-2" type="button">ÁP DỤNG</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right: Order Summary Card -->
+            <div class="col-12 col-lg-4">
+                <div class="order-summary-card">
+                    <h5 class="order-summary-title">TỔNG KẾT ĐƠN HÀNG</h5>
+
+                    <div class="summary-row">
+                        <span>Tạm tính (@Model.Sum(p => p.SoLuong) đôi giày):</span>
+                        <span class="font-weight-bold text-dark">@Model.Sum(p => p.ThanhTien).ToString("#,##0") VNĐ</span>
+                    </div>
+
+                    <div class="summary-row">
+                        <span>Phí giao hàng:</span>
+                        <span class="text-success font-weight-bold">MIỄN PHÍ</span>
+                    </div>
+
+                    <div class="summary-row">
+                        <span>Giảm giá voucher:</span>
+                        <span class="text-danger font-weight-bold">-0 VNĐ</span>
+                    </div>
+
+                    <div class="summary-row total-row">
+                        <span>TỔNG CỘNG:</span>
+                        <span>@Model.Sum(p => p.ThanhTien).ToString("#,##0") VNĐ</span>
+                    </div>
+
+                    <div class="mt-4">
+                        <a asp-controller="Cart" asp-action="Checkout" class="btn-teahouse w-100 py-3 text-center" style="font-size: 16px;">
+                            <i class="fa fa-credit-card mr-2"></i> TIẾN HÀNH THANH TOÁN
+                        </a>
+                    </div>
+
+                    <div class="mt-3 text-center text-muted small">
+                        <i class="fa fa-shield text-success mr-1"></i> Đóng gói Double-Box • Hỗ trợ đổi size 30 ngày
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <!-- Empty Cart State -->
+        <div class="text-center py-5">
+            <div style="width: 100px; height: 100px; border-radius: 50%; background: #FFF1F0; color: #FF4D2D; display: inline-flex; align-items: center; justify-content: center; font-size: 40px; margin-bottom: 20px;">
+                <i class="fa fa-shopping-basket"></i>
+            </div>
+            <h3 class="font-weight-bold" style="color: var(--brand-brown-dark);">Giỏ hàng của bạn đang trống!</h3>
+            <p class="text-muted mb-4">Hãy chọn cho mình một đôi giày thể thao ưng ý từ bộ sưu tập mới nhất.</p>
+            <a asp-controller="HangHoa" asp-action="Index" class="btn-teahouse px-5 py-3">
+                <i class="fas fa-running mr-2"></i> KHÁM PHÁ GIÀY THỂ THAO NGAY
+            </a>
+        </div>
+    }
+</div>

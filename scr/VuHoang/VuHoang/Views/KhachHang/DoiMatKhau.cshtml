@@ -1,0 +1,69 @@
+@model CakeShop.ModelsView.DoiMatKhau
+@{
+    ViewData["Title"] = "Đổi mật khẩu";
+}
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-8 col-lg-6">
+            <div class="p-4 p-md-5 rounded" style="background:#FFFFFF; border: 1px solid var(--border-soft); box-shadow: var(--shadow-md); border-radius: 24px;">
+                <div class="text-center mb-4">
+                    <div style="width: 70px; height: 70px; border-radius: 50%; background: #FAF3EC; color: var(--brand-brown); display: inline-flex; align-items: center; justify-content: center; font-size: 28px; margin-bottom: 16px;">
+                        <i class="fa fa-key"></i>
+                    </div>
+                    <h3 class="font-weight-bold" style="color: var(--brand-brown-dark);">ĐỔI MẬT KHẨU</h3>
+                    <p class="text-muted small">Cập nhật mật khẩu định kỳ để bảo vệ tài khoản và tích điểm an toàn</p>
+                </div>
+
+                <form id="frmcheckmail" asp-action="DoiMatKhau" asp-controller="KhachHang" method="post">
+                    <div class="form-group mb-3">
+                        <label class="font-weight-bold small text-muted">MẬT KHẨU HIỆN TẠI <span class="text-danger">*</span></label>
+                        <input asp-for="@Model.matKhauHienTai" type="password" class="form-control" id="matKhauHienTai" placeholder="Nhập mật khẩu hiện tại" required>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label class="font-weight-bold small text-muted">MẬT KHẨU MỚI <span class="text-danger">*</span></label>
+                        <input type="password" asp-for="@Model.matKhauMoi" id="matKhauMoi" name="matKhauMoi"
+                               class="form-control" required="required"
+                               onkeyup="kiemTraNewPassword()" placeholder="Tối thiểu 6 ký tự" />
+                    </div>
+
+                    <div class="form-group mb-4">
+                        <label class="font-weight-bold small text-muted">NHẬP LẠI MẬT KHẨU MỚI <span class="text-danger">*</span></label>
+                        <input asp-for="@Model.matKhauMoiNhapLai" type="password" id="matKhauMoiNhapLai" name="matKhauMoiNhapLai"
+                               class="form-control" required="required"
+                               onkeyup="kiemTraNewPassword()" placeholder="Xác nhận lại mật khẩu mới" />
+                    </div>
+
+                    <div class="text-danger mb-3 font-weight-bold small" id="msger" asp-validation-summary="All"></div>
+
+                    <div class="d-flex justify-content-between align-items-center">
+                        <a class="btn btn-teahouse-outline" asp-action="Profile" asp-controller="KhachHang">
+                            Quay lại
+                        </a>
+                        <button type="submit" class="btn-teahouse px-4 py-2">
+                            LƯU MẬT KHẨU
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function kiemTraNewPassword() {
+            var matKhauMoi = document.getElementById("matKhauMoi").value;
+            var matKhauMoiNhapLai = document.getElementById("matKhauMoiNhapLai").value;
+
+            if (matKhauMoi != matKhauMoiNhapLai) {
+                document.getElementById("msger").textContent = "Mật khẩu mới không khớp!";
+                return false;
+            } else {
+                document.getElementById("msger").textContent = "";
+                return true;
+            }
+        }
+    </script>
+}

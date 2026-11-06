@@ -1,0 +1,12 @@
+@model CakeShop.ModelsView.CartModel
+@{
+    ViewData["Title"] = "CartPanel";
+}
+
+<a asp-controller="Cart" asp-action="Index" class="header-action-btn" title="Giỏ hàng">
+    <i class="fa fa-shopping-bag"></i>
+    @if (Model.Quantity > 0)
+    {
+        <span class="header-badge-count">@Model.Quantity</span>
+    }
+</a>

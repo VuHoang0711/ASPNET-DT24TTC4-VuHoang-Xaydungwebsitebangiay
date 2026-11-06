@@ -1,0 +1,156 @@
+@model IEnumerable<CakeShop.ModelsView.CartItem>
+@{
+    ViewData["Title"] = "Thanh toán đơn hàng giày thể thao";
+}
+
+<div class="container py-5">
+    <!-- Step indicator bar -->
+    <div class="checkout-steps-bar mb-5">
+        <div class="checkout-step-item active">
+            <span class="step-num">1</span>
+            <span>THÔNG TIN GIAO HÀNG</span>
+        </div>
+        <div class="checkout-step-item active">
+            <span class="step-num">2</span>
+            <span>ĐƠN HÀNG</span>
+        </div>
+        <div class="checkout-step-item active">
+            <span class="step-num">3</span>
+            <span>THANH TOÁN</span>
+        </div>
+        <div class="checkout-step-item">
+            <span class="step-num">4</span>
+            <span>HOÀN TẤT</span>
+        </div>
+    </div>
+
+    <!-- Main Checkout Form -->
+    <form asp-action="Checkout" asp-controller="Cart" method="post">
+        <div class="row g-5">
+            <!-- Left: Delivery Information & Payment Method -->
+            <div class="col-12 col-lg-7">
+                <div class="p-4 rounded mb-4" style="background:#FFFFFF; border:1px solid var(--border-soft); box-shadow: var(--shadow-sm); border-radius: 20px;">
+                    <h4 class="font-weight-bold mb-3" style="color: var(--brand-brown-dark);">
+                        <i class="fa fa-map-marker text-danger mr-2"></i> Thông Tin Người Nhận
+                    </h4>
+
+                    <div class="custom-control custom-checkbox mb-4 p-3 rounded" style="background: var(--bg-cream);">
+                        <input type="checkbox" name="GiongKhachHang" class="custom-control-input" id="GiongKhachHang" value="false">
+                        <label class="custom-control-label font-weight-bold" for="GiongKhachHang" style="cursor: pointer; color: var(--brand-brown);">
+                            Sử dụng thông tin tài khoản mặc định
+                        </label>
+                    </div>
+
+                    <div class="delivery-info">
+                        <div class="form-group mb-3">
+                            <label class="font-weight-bold small text-muted">HỌ VÀ TÊN NGƯỜI NHẬN <span class="text-danger">*</span></label>
+                            <input type="text" name="HoTen" class="form-control" placeholder="Ví dụ: Nguyễn Văn A" required>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label class="font-weight-bold small text-muted">SỐ ĐIỆN THOẠI NHẬN HÀNG <span class="text-danger">*</span></label>
+                            <input type="tel" name="DienThoai" class="form-control" placeholder="Ví dụ: 0912 345 678" required>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label class="font-weight-bold small text-muted">ĐỊA CHỈ GIAO TẬN NƠI <span class="text-danger">*</span></label>
+                            <input type="text" name="DiaChi" class="form-control" placeholder="Số nhà, tên đường, phường/xã, quận/huyện..." required>
+                        </div>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label class="font-weight-bold small text-muted">GHI CHÚ ĐƠN HÀNG (SIZE GIÀY / THỜI GIAN GIAO)</label>
+                        <textarea name="GhiChu" class="form-control" rows="3" placeholder="Ghi chú xác nhận size giày, màu sắc hoặc khung giờ giao hàng thuận tiện..."></textarea>
+                    </div>
+                </div>
+
+                <!-- Payment Methods Section -->
+                <div class="p-4 rounded mb-4" style="background:#FFFFFF; border:1px solid var(--border-soft); box-shadow: var(--shadow-sm); border-radius: 20px;">
+                    <h4 class="font-weight-bold mb-3" style="color: var(--brand-brown-dark);">
+                        <i class="fa fa-credit-card text-success mr-2"></i> Phương Thức Thanh Toán
+                    </h4>
+
+                    <div class="mb-3">
+                        <button type="submit" name="payment" value="Thanh toán tiền mặt COD" class="btn btn-block p-3 text-left d-flex align-items-center justify-content-between mb-2" style="background: var(--bg-cream); border: 1.5px solid var(--border-soft); border-radius: 14px; font-weight: 700; color: var(--brand-brown-dark);">
+                            <div>
+                                <i class="fa fa-money text-success mr-2 fa-lg"></i> Thanh toán tiền mặt khi nhận hàng (COD)
+                                <div class="small text-muted font-weight-normal mt-1">Được kiểm tra giày, đúng mẫu và đúng size trước khi thanh toán</div>
+                            </div>
+                            <span class="badge badge-pill badge-success px-3 py-2">XÁC NHẬN COD</span>
+                        </button>
+                    </div>
+
+                    <div class="mb-3">
+                        <button type="submit" name="payment" value="Thanh toán trực tuyến VNPay" class="btn btn-block p-3 text-left d-flex align-items-center justify-content-between" style="background: linear-gradient(135deg, #EBF3FA 0%, #E2EDF8 100%); border: 1.5px solid #005BAA; border-radius: 14px; font-weight: 700; color: #005BAA;">
+                            <div>
+                                <i class="fa fa-qrcode text-primary mr-2 fa-lg"></i> Cổng thanh toán trực tuyến VNPay
+                                <div class="small text-muted font-weight-normal mt-1">Thanh toán qua quét mã VNPAY-QR, Thẻ ATM nội địa hoặc Visa/Mastercard</div>
+                            </div>
+                            <span class="badge badge-pill badge-primary px-3 py-2">THANH TOÁN VNPAY</span>
+                        </button>
+                    </div>
+
+                    <div id="paypal-button-container" class="mt-3"></div>
+                </div>
+            </div>
+
+            <!-- Right: Order Summary Sidebar -->
+            <div class="col-12 col-lg-5">
+                <div class="order-summary-card">
+                    <h4 class="order-summary-title">ĐƠN HÀNG CỦA BẠN</h4>
+
+                    <div class="order-items-list mb-3" style="max-height: 380px; overflow-y: auto;">
+                        @foreach (var item in Model)
+                        {
+                            <div class="d-flex align-items-center justify-content-between py-2 border-bottom">
+                                <div class="d-flex align-items-center">
+                                    <img src="~/Hinh/HangHoa/@item.Hinh" class="rounded-circle mr-3" style="width: 50px; height: 50px; object-fit: cover; border: 1px solid var(--border-soft);" alt="@item.TenHH" onerror="this.src='/Hinh/HangHoa/nike-af1-07.jpg';" />
+                                    <div>
+                                        <h6 class="mb-0 font-weight-bold" style="font-size: 14.5px; color: var(--brand-brown-dark);">@item.TenHH</h6>
+                                        <small class="text-muted">Size: @item.KichCo • SL: @item.SoLuong đôi</small>
+                                    </div>
+                                </div>
+                                <span class="font-weight-bold" style="color: var(--brand-brown);">@item.ThanhTien.ToString("#,##0")đ</span>
+                            </div>
+                        }
+                    </div>
+
+                    <div class="summary-row">
+                        <span>Tạm tính (@Model.Sum(p => p.SoLuong) đôi giày):</span>
+                        <span class="font-weight-bold text-dark">@Model.Sum(p => p.ThanhTien).ToString("#,##0") VNĐ</span>
+                    </div>
+
+                    <div class="summary-row">
+                        <span>Phí giao hàng:</span>
+                        <span class="text-success font-weight-bold">MIỄN PHÍ</span>
+                    </div>
+
+                    <div class="summary-row total-row">
+                        <span>TỔNG THANH TOÁN:</span>
+                        <span>@Model.Sum(p => p.ThanhTien).ToString("#,##0") VNĐ</span>
+                    </div>
+
+                    <div class="alert alert-warning mt-3 small mb-0" style="border-radius: 12px;">
+                        <i class="fa fa-cube mr-1"></i> Giày sẽ được đóng gói <strong>Double-Box</strong> bảo vệ hộp giày nguyên vẹn và hỗ trợ đổi size trong 30 ngày.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $("#GiongKhachHang").change(function () {
+                if ($(this).prop("checked")) {
+                    $(this).val(true);
+                    $(".delivery-info").slideUp(200);
+                } else {
+                    $(this).val(false);
+                    $(".delivery-info").slideDown(200);
+                }
+            });
+        });
+    </script>
+}

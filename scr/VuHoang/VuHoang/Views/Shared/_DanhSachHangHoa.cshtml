@@ -1,0 +1,95 @@
+@using X.PagedList
+@model IPagedList<CakeShop.ModelsView.HangHoaVM>
+@{
+    Layout = "_LayoutCustomer";
+    var currentAction = ViewContext.RouteData.Values["action"]?.ToString() ?? "Index";
+}
+
+<!-- Single Page Header start -->
+@RenderSection("BreadCum", required: false)
+<!-- Single Page Header End -->
+
+<!-- ##### Shop Grid Area Start ##### -->
+<section class="shop_grid_area" style="padding: 50px 0; background: var(--bg-primary);">
+    <div class="container">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-12 col-md-4 col-lg-3">
+                <div class="shop_sidebar_area">
+                    @await Component.InvokeAsync("MenuLoai")
+                </div>
+            </div>
+
+            <!-- Product Grid Area -->
+            <div class="col-12 col-md-8 col-lg-9">
+                <div class="shop_grid_product_area">
+                    <div class="row mb-4">
+                        <div class="col-12">
+                            <div class="d-flex flex-wrap align-items-center justify-content-between p-3 rounded" style="background:#FFFFFF; border:1px solid var(--border-soft); box-shadow: var(--shadow-sm); gap: 12px;">
+                                <!-- Total Products -->
+                                <div class="total-products">
+                                    <p class="mb-0" style="font-weight: 600; color: var(--brand-brown-dark);">
+                                        Tìm thấy <span class="badge badge-pill" style="background: var(--brand-peach-soft); color: var(--brand-peach); font-size: 14px;">@Model.TotalItemCount</span> mẫu giày thể thao phù hợp
+                                    </p>
+                                </div>
+
+                                <!-- Sorting Dropdown -->
+                                <div class="d-flex align-items-center" style="gap: 10px;">
+                                    <span class="small text-muted font-weight-bold">Sắp xếp:</span>
+                                    <select class="form-control form-control-sm" style="width: auto; border-radius: 999px; font-weight: 600;"
+                                            onchange="if(this.value) window.location.href=this.value;">
+                                        <option value="@Url.Action(currentAction, "HangHoa", new { loai = ViewBag.Loai, query = ViewBag.Query, thuonghieu = ViewBag.ThuongHieu, gioitinh = ViewBag.GioiTinh, size = ViewBag.Size, mucgia = ViewBag.MucGia, trangthai = ViewBag.TrangThai, sort = "" })" selected="@(string.IsNullOrEmpty(ViewBag.Sort as string))">Mặc định</option>
+                                        <option value="@Url.Action(currentAction, "HangHoa", new { loai = ViewBag.Loai, query = ViewBag.Query, thuonghieu = ViewBag.ThuongHieu, gioitinh = ViewBag.GioiTinh, size = ViewBag.Size, mucgia = ViewBag.MucGia, trangthai = ViewBag.TrangThai, sort = "price_asc" })" selected="@(ViewBag.Sort as string == "price_asc")">Giá tăng dần</option>
+                                        <option value="@Url.Action(currentAction, "HangHoa", new { loai = ViewBag.Loai, query = ViewBag.Query, thuonghieu = ViewBag.ThuongHieu, gioitinh = ViewBag.GioiTinh, size = ViewBag.Size, mucgia = ViewBag.MucGia, trangthai = ViewBag.TrangThai, sort = "price_desc" })" selected="@(ViewBag.Sort as string == "price_desc")">Giá giảm dần</option>
+                                        <option value="@Url.Action(currentAction, "HangHoa", new { loai = ViewBag.Loai, query = ViewBag.Query, thuonghieu = ViewBag.ThuongHieu, gioitinh = ViewBag.GioiTinh, size = ViewBag.Size, mucgia = ViewBag.MucGia, trangthai = ViewBag.TrangThai, sort = "newest" })" selected="@(ViewBag.Sort as string == "newest")">Mới nhất</option>
+                                        <option value="@Url.Action(currentAction, "HangHoa", new { loai = ViewBag.Loai, query = ViewBag.Query, thuonghieu = ViewBag.ThuongHieu, gioitinh = ViewBag.GioiTinh, size = ViewBag.Size, mucgia = ViewBag.MucGia, trangthai = ViewBag.TrangThai, sort = "bestseller" })" selected="@(ViewBag.Sort as string == "bestseller")">Bán chạy</option>
+                                        <option value="@Url.Action(currentAction, "HangHoa", new { loai = ViewBag.Loai, query = ViewBag.Query, thuonghieu = ViewBag.ThuongHieu, gioitinh = ViewBag.GioiTinh, size = ViewBag.Size, mucgia = ViewBag.MucGia, trangthai = ViewBag.TrangThai, sort = "rating" })" selected="@(ViewBag.Sort as string == "rating")">Đánh giá cao</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <!-- Single Product -->
+                        @RenderBody()
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ##### Pagination List Start ##### -->
+    @if (Model.PageCount > 1)
+    {
+        <div class="container d-flex justify-content-center align-content-center mt-4">
+            <nav aria-label="navigation">
+                <ul class="pagination" style="gap: 6px;">
+                    @if (Model.HasPreviousPage)
+                    {
+                        <li class="page-item">
+                            <a class="page-link rounded-circle" style="width: 42px; height: 42px; display: flex; align-items: center; justify-content: center; color: var(--brand-brown); border-color: var(--border-soft);" href="@Url.Action(currentAction, new { loai = ViewBag.Loai, query = ViewBag.Query, thuonghieu = ViewBag.ThuongHieu, gioitinh = ViewBag.GioiTinh, size = ViewBag.Size, mucgia = ViewBag.MucGia, trangthai = ViewBag.TrangThai, sort = ViewBag.Sort, page = Model.PageNumber - 1 })">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        </li>
+                    }
+                    @for (int i = 1; i <= Model.PageCount; i++)
+                    {
+                        <li class="page-item @(Model.PageNumber == i ? "active" : "")">
+                            <a class="page-link rounded-circle" style="width: 42px; height: 42px; display: flex; align-items: center; justify-content: center; font-weight: 700; @(Model.PageNumber == i ? "background: var(--brand-brown-dark); border-color: var(--brand-brown-dark); color: #fff;" : "color: var(--brand-brown); border-color: var(--border-soft);")" href="@Url.Action(currentAction, new { loai = ViewBag.Loai, query = ViewBag.Query, thuonghieu = ViewBag.ThuongHieu, gioitinh = ViewBag.GioiTinh, size = ViewBag.Size, mucgia = ViewBag.MucGia, trangthai = ViewBag.TrangThai, sort = ViewBag.Sort, page = i })">@i</a>
+                        </li>
+                    }
+                    @if (Model.HasNextPage)
+                    {
+                        <li class="page-item">
+                            <a class="page-link rounded-circle" style="width: 42px; height: 42px; display: flex; align-items: center; justify-content: center; color: var(--brand-brown); border-color: var(--border-soft);" href="@Url.Action(currentAction, new { loai = ViewBag.Loai, query = ViewBag.Query, thuonghieu = ViewBag.ThuongHieu, gioitinh = ViewBag.GioiTinh, size = ViewBag.Size, mucgia = ViewBag.MucGia, trangthai = ViewBag.TrangThai, sort = ViewBag.Sort, page = Model.PageNumber + 1 })">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        </li>
+                    }
+                </ul>
+            </nav>
+        </div>
+    }
+    <!-- ##### Pagination List End ##### -->
+</section>

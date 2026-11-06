@@ -1,0 +1,98 @@
+@model CakeShop.ModelsView.RegisterVM
+@{
+    ViewData["Title"] = "Đăng ký thành viên Sneaker Store";
+}
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-12 col-xl-10">
+            <div class="p-4 p-md-5 rounded" style="background:#FFFFFF; border: 1px solid var(--border-soft); box-shadow: var(--shadow-lg); border-radius: 24px;">
+                <div class="text-center mb-5">
+                    <span class="badge badge-pill px-3 py-2 mb-2" style="background: var(--brand-peach-soft); color: var(--brand-peach); font-weight: 700; font-size: 13px;">
+                        GIA NHẬP CỘNG ĐỒNG SNEAKER STORE
+                    </span>
+                    <h2 class="font-weight-bold" style="color: var(--brand-brown-dark);">ĐĂNG KÝ THÀNH VIÊN</h2>
+                    <p class="text-muted">Nhận ngay ưu đãi cho đơn hàng đầu tiên và tích lũy điểm thưởng khi mua sắm giày thể thao!</p>
+                </div>
+
+                <form action="DangKy" method="post" enctype="multipart/form-data">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="font-weight-bold small text-muted">TÊN ĐĂNG NHẬP / MÃ KH <span class="text-danger">*</span></label>
+                            <input type="text" asp-for="@Model.MaKh" class="form-control" placeholder="Tên đăng nhập (viết liền không dấu)" required />
+                            <span asp-validation-for="@Model.MaKh" class="text-danger small"></span>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label class="font-weight-bold small text-muted">MẬT KHẨU <span class="text-danger">*</span></label>
+                            <input type="password" asp-for="@Model.MatKhau" class="form-control" placeholder="Tối thiểu 6 ký tự" required />
+                            <span asp-validation-for="@Model.MatKhau" class="text-danger small"></span>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label class="font-weight-bold small text-muted">HỌ VÀ TÊN <span class="text-danger">*</span></label>
+                            <input type="text" asp-for="@Model.HoTen" class="form-control" placeholder="Họ và tên của bạn" required />
+                            <span asp-validation-for="@Model.HoTen" class="text-danger small"></span>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label class="font-weight-bold small text-muted">GIỚI TÍNH <span class="text-danger">*</span></label>
+                            <div class="d-flex align-items-center mt-2" style="gap: 24px;">
+                                <div class="custom-control custom-radio">
+                                    <input class="custom-control-input" type="radio" name="GioiTinh" id="genderNam" value="true">
+                                    <label class="custom-control-label font-weight-bold" for="genderNam">Nam</label>
+                                </div>
+                                <div class="custom-control custom-radio">
+                                    <input class="custom-control-input" type="radio" name="GioiTinh" id="genderNu" value="false" checked>
+                                    <label class="custom-control-label font-weight-bold" for="genderNu">Nữ</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label class="font-weight-bold small text-muted">NGÀY SINH <span class="text-danger">*</span></label>
+                            <input type="date" asp-for="@Model.NgaySinh" class="form-control" required />
+                            <span asp-validation-for="@Model.NgaySinh" class="text-danger small"></span>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label class="font-weight-bold small text-muted">SỐ ĐIỆN THOẠI <span class="text-danger">*</span></label>
+                            <input type="tel" asp-for="@Model.DienThoai" class="form-control" placeholder="Số điện thoại nhận hàng" required />
+                            <span asp-validation-for="@Model.DienThoai" class="text-danger small"></span>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label class="font-weight-bold small text-muted">EMAIL <span class="text-danger">*</span></label>
+                            <input type="email" asp-for="@Model.Email" class="form-control" placeholder="Địa chỉ email hợp lệ" required />
+                            <span asp-validation-for="@Model.Email" class="text-danger small"></span>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label class="font-weight-bold small text-muted">ĐỊA CHỈ GIAO HÀNG <span class="text-danger">*</span></label>
+                            <input type="text" asp-for="@Model.DiaChi" class="form-control" placeholder="Địa chỉ giao giày tận nơi" required />
+                            <span asp-validation-for="@Model.DiaChi" class="text-danger small"></span>
+                        </div>
+
+                        <div class="col-md-12 mb-4">
+                            <label class="font-weight-bold small text-muted">ẢNH ĐẠI DIỆN <span class="text-danger">*</span></label>
+                            <input type="file" asp-for="@Model.Hinh" name="Hinh" class="form-control file-upload" required accept=".png, .jpg, .jpeg" />
+                            <span asp-validation-for="@Model.Hinh" class="text-danger small"></span>
+                        </div>
+
+                        <div class="col-12 text-center mt-3">
+                            <button type="submit" class="btn-teahouse px-5 py-3 w-100" style="font-size: 16px;">
+                                <i class="fa fa-user-plus mr-2"></i> HOÀN TẤT ĐĂNG KÝ
+                            </button>
+                            <p class="mt-3 small text-muted">
+                                Đã có tài khoản Sneaker Store?
+                                <a asp-controller="KhachHang" asp-action="DangNhap" class="font-weight-bold" style="color: var(--brand-peach);">
+                                    Đăng nhập ngay
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

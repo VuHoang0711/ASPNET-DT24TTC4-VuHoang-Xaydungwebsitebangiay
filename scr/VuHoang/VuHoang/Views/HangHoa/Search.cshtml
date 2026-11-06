@@ -1,0 +1,26 @@
+@model IEnumerable<CakeShop.ModelsView.HangHoaVM>
+@{
+    ViewData["Title"] = "Kết quả tìm kiếm giày thể thao";
+    Layout = "_DanhSachHangHoa";
+}
+
+@section BreadCum
+{
+    <div class="breadcumb_area"
+         style="background: linear-gradient(135deg, rgba(17, 24, 39, 0.85) 0%, rgba(31, 41, 55, 0.78) 100%), url('/img/bg-img/sneaker-banner.jpg') center/cover; padding: 60px 0;">
+        <div class="container h-100">
+            <div class="row h-100 align-items-center">
+                <div class="col-12 text-center text-white">
+                    <span class="badge badge-pill mb-2 px-3 py-2" style="background: var(--brand-peach); font-size: 13px; font-weight: 700; letter-spacing: 1px;">
+                        TÌM GIÀY THỂ THAO & THƯƠNG HIỆU
+                    </span>
+                    <h1 class="text-white" style="font-size: 2.6rem; font-weight: 900;">
+                        KẾT QUẢ TÌM KIẾM @(ViewBag.Query != null ? $"“{ViewBag.Query}”" : "")
+                    </h1>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@await Html.PartialAsync("ProductItem", Model)

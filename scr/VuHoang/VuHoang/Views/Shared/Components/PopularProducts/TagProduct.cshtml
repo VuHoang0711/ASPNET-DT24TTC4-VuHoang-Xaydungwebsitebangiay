@@ -1,0 +1,90 @@
+@model IEnumerable<CakeShop.ModelsView.ChiTietHangHoaVM>
+@{
+    ViewData["Title"] = "TagProduct";
+}
+
+<div class="container">
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-12 col-sm-6 col-lg-3 d-flex align-items-stretch">
+                <div class="teahouse-product-card w-100">
+                    <!-- Product Image -->
+                    <div class="product-img-box">
+                        <a asp-action="Detail" asp-controller="HangHoa" asp-route-id="@item.MaHh" class="w-100 h-100 d-block">
+                            <img src="~/Hinh/HangHoa/@item.Hinh" alt="@item.TenHH" onerror="this.src='/Hinh/HangHoa/nike-af1-07.jpg';" />
+                        </a>
+
+                        <!-- Badges -->
+                        @if (item.GiamGia > 0)
+                        {
+                            <span class="product-badge-pill">
+                                GIẢM GIÁ
+                            </span>
+                        }
+                        else
+                        {
+                            var badgeText = (item.MaHh % 3) switch
+                            {
+                                1 => "BÁN CHẠY",
+                                2 => "MỚI",
+                                _ => "HOT"
+                            };
+                            <span class="product-badge-pill product-badge-seller">
+                                @badgeText
+                            </span>
+                        }
+
+                        <!-- Favourite Icon -->
+                        <a asp-action="Detail" asp-controller="HangHoa" asp-route-id="@item.MaHh" class="product-fav-icon" title="Xem chi tiết">
+                            <i class="fa fa-heart-o"></i>
+                        </a>
+                    </div>
+
+                    <!-- Product Details -->
+                    <div class="product-card-body">
+                        <span class="product-cat-tag">@(item.TenLoai ?? "Giày Sneaker")</span>
+                        <a asp-action="Detail" asp-controller="HangHoa" asp-route-id="@item.MaHh">
+                            <h5 class="product-card-title" title="@item.TenHH">@item.TenHH</h5>
+                        </a>
+
+                        <!-- Rating Stars -->
+                        <div class="product-rating">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <span>(4.9)</span>
+                        </div>
+
+                        <!-- Price -->
+                        <div class="product-price-row">
+                            @if (item.GiamGia > 0)
+                            {
+                                <span class="product-current-price">@((item.DonGia - item.GiamGia).ToString("#,##0"))đ</span>
+                                <span class="product-old-price">@item.DonGia.ToString("#,##0")đ</span>
+                            }
+                            else
+                            {
+                                <span class="product-current-price">@item.DonGia.ToString("#,##0")đ</span>
+                            }
+                        </div>
+
+                        <!-- Quick Spec Indicator -->
+                        <div class="product-quick-size">
+                            <span class="size-pill">Size 36-44</span>
+                            <span class="size-pill">Fullbox</span>
+                            <span class="size-pill" style="background:#FFF1F0; color:#FF4D2D; border-color:#FECACA;">Đổi size 30N</span>
+                        </div>
+
+                        <!-- Add To Cart -->
+                        <a asp-action="AddToCart" asp-controller="Cart" asp-route-id="@item.MaHh" class="btn-card-addcart">
+                            <i class="fa fa-plus-circle"></i> THÊM VÀO GIỎ
+                        </a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

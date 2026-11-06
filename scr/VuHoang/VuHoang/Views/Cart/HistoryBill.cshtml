@@ -1,0 +1,119 @@
+@model IPagedList<CakeShop.Data.HoaDon>
+@using X.PagedList
+@{
+    ViewData["Title"] = "Lịch sử đơn hàng";
+}
+
+<div class="container py-5">
+    <div class="d-flex align-items-center justify-content-between mb-4 flex-wrap">
+        <div>
+            <span class="badge badge-pill px-3 py-1 mb-2" style="background: var(--brand-peach-soft); color: var(--brand-peach); font-weight: 700;">
+                QUẢN LÝ ĐƠN HÀNG
+            </span>
+            <h2 class="font-weight-bold" style="color: var(--brand-brown-dark);">LỊCH SỬ MUA HÀNG</h2>
+        </div>
+        <a asp-controller="HangHoa" asp-action="Index" class="btn-teahouse-peach mt-2">
+            <i class="fa fa-plus-circle mr-1"></i> CHỌN THÊM GIÀY MỚI
+        </a>
+    </div>
+
+    <div class="cart-table-wrapper p-3 p-md-4">
+        @if (Model != null && Model.Any())
+        {
+            <div class="table-responsive">
+                <table class="table teahouse-table mb-0">
+                    <thead>
+                        <tr>
+                            <th scope="col" style="border-top: none;">Mã ĐH</th>
+                            <th scope="col" style="border-top: none;">Người Nhận</th>
+                            <th scope="col" style="border-top: none;">Số Điện Thoại</th>
+                            <th scope="col" style="border-top: none;">Địa Chỉ Giao</th>
+                            <th scope="col" style="border-top: none;">Ngày Đặt</th>
+                            <th scope="col" style="border-top: none;">Vận Chuyển</th>
+                            <th scope="col" style="border-top: none;">Ghi Chú</th>
+                            <th scope="col" style="border-top: none;" class="text-center">Trạng Thái</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    <span class="badge badge-secondary px-2 py-1 font-weight-bold">
+                                        #@item.MaHd
+                                    </span>
+                                </td>
+                                <td>
+                                    <strong style="color: var(--brand-brown-dark);">@item.HoTen</strong>
+                                </td>
+                                <td>@item.DienThoai</td>
+                                <td style="max-width: 200px;" class="text-truncate" title="@item.DiaChi">@item.DiaChi</td>
+                                <td>
+                                    <span class="small text-muted">
+                                        @(item.NgayDat.ToString("dd/MM/yyyy HH:mm"))
+                                    </span>
+                                </td>
+                                <td>
+                                    <span class="badge badge-light border">
+                                        @(string.IsNullOrEmpty(item.CachVanChuyen) ? "Giao hàng tận nơi" : item.CachVanChuyen)
+                                    </span>
+                                </td>
+                                <td style="max-width: 150px;" class="text-truncate text-muted small" title="@item.GhiChu">
+                                    @(string.IsNullOrEmpty(item.GhiChu) ? "Không có" : item.GhiChu)
+                                </td>
+                                <td class="text-center">
+                                    <span class="badge badge-success px-3 py-1 font-weight-bold" style="background: #16A34A; border-radius: 999px;">
+                                        Đang xử lý / Hoàn tất
+                                    </span>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Pagination -->
+            @if (Model.PageCount > 1)
+            {
+                <div class="d-flex justify-content-center mt-4">
+                    <nav aria-label="navigation">
+                        <ul class="pagination" style="gap: 6px;">
+                            @if (Model.HasPreviousPage)
+                            {
+                                <li class="page-item">
+                                    <a class="page-link rounded-circle" style="width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; color: var(--brand-brown);" href="@Url.Action("HistoryBill", new { page = Model.PageNumber - 1 })">
+                                        <i class="fa fa-angle-left"></i>
+                                    </a>
+                                </li>
+                            }
+                            @for (int a = 1; a <= Model.PageCount; a++)
+                            {
+                                <li class="page-item @(Model.PageNumber == a ? "active" : "")">
+                                    <a class="page-link rounded-circle" style="width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; font-weight: 700; @(Model.PageNumber == a ? "background: var(--brand-brown-dark); border-color: var(--brand-brown-dark); color: #fff;" : "color: var(--brand-brown);")" href="@Url.Action("HistoryBill", new { page = a })">@a</a>
+                                </li>
+                            }
+                            @if (Model.HasNextPage)
+                            {
+                                <li class="page-item">
+                                    <a class="page-link rounded-circle" style="width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; color: var(--brand-brown);" href="@Url.Action("HistoryBill", new { page = Model.PageNumber + 1 })">
+                                        <i class="fa fa-angle-right"></i>
+                                    </a>
+                                </li>
+                            }
+                        </ul>
+                    </nav>
+                </div>
+            }
+        }
+        else
+        {
+            <div class="text-center py-5">
+                <i class="fa fa-file-text-o fa-3x text-muted mb-3"></i>
+                <h5 class="font-weight-bold text-muted">Bạn chưa có đơn đặt hàng giày thể thao nào!</h5>
+                <a asp-controller="HangHoa" asp-action="Index" class="btn-teahouse mt-3">
+                    MUA SẮM NGAY
+                </a>
+            </div>
+        }
+    </div>
+</div>

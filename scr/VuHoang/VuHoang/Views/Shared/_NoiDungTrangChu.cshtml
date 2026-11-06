@@ -1,0 +1,361 @@
+<!-- ##### HERO SECTION START ##### -->
+<section class="teahouse-hero" style="background: linear-gradient(135deg, #F8FAFC 0%, #F1F5F9 55%, #FFF1F0 100%);">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-12 col-lg-6">
+                <div class="hero-content-box">
+                    <div class="hero-pill-badge">
+                        <i class="fa fa-fire text-danger"></i> BỘ SƯU TẬP SNEAKER MỚI NHẤT • ĐỦ SIZE 36 - 45
+                    </div>
+                    <h1 class="hero-title" style="font-size: 3.1rem;">
+                        BỨT PHÁ PHONG CÁCH – <br />
+                        <span class="highlight-peach">CHINH PHỤC MỌI BƯỚC CHÂN</span>
+                    </h1>
+                    <p class="hero-desc">
+                        Khám phá bộ sưu tập giày thể thao thời thượng từ Nike, Adidas và nhiều thương hiệu hàng đầu. Tìm đôi giày phù hợp với phong cách của bạn.
+                    </p>
+                    <div class="d-flex flex-wrap gap-3 align-items-center mb-4">
+                        <a asp-action="Index" asp-controller="HangHoa" class="btn-teahouse mr-3 mb-2">
+                            <i class="fa fa-shopping-bag"></i> MUA SẮM NGAY
+                        </a>
+                        <a href="#menu-categories" class="btn-teahouse-outline mb-2">
+                            <i class="fas fa-running"></i> KHÁM PHÁ DANH MỤC
+                        </a>
+                    </div>
+                    <!-- Hero Stats -->
+                    <div class="hero-stats">
+                        <div class="hero-stat-item">
+                            <span class="hero-stat-num">7+</span>
+                            <span class="hero-stat-label">Thương hiệu giày nổi tiếng</span>
+                        </div>
+                        <div class="hero-stat-item">
+                            <span class="hero-stat-num">20.000+</span>
+                            <span class="hero-stat-label">Khách hàng yêu thích</span>
+                        </div>
+                        <div class="hero-stat-item">
+                            <span class="hero-stat-num">30 Ngày</span>
+                            <span class="hero-stat-label">Hỗ trợ đổi size linh hoạt</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-lg-6">
+                <div class="hero-img-wrapper">
+                    <img src="~/img/bg-img/sneaker-hero.jpg" alt="Bộ sưu tập giày thể thao Sneaker Store" class="hero-main-img" onerror="this.src='/Hinh/HangHoa/nike-af1-07.jpg';" />
+                    
+                    <!-- Floating Card Left -->
+                    <div class="hero-floating-card hero-card-left d-none d-md-flex">
+                        <div style="width: 44px; height: 44px; border-radius: 50%; background: #FFF1F0; display: flex; align-items: center; justify-content: center; color: #FF4D2D; font-size: 20px;">
+                            <i class="fa fa-star"></i>
+                        </div>
+                        <div class="text-left">
+                            <h6 class="mb-0" style="font-size: 14px; font-weight: 700;">Đánh giá 4.9/5</h6>
+                            <small class="text-muted">Form chuẩn & êm chân</small>
+                        </div>
+                    </div>
+
+                    <!-- Floating Card Right -->
+                    <div class="hero-floating-card hero-card-right d-none d-md-flex">
+                        <div style="width: 44px; height: 44px; border-radius: 50%; background: #DCFCE7; display: flex; align-items: center; justify-content: center; color: #16A34A; font-size: 20px;">
+                            <i class="fa fa-check-circle"></i>
+                        </div>
+                        <div class="text-left">
+                            <h6 class="mb-0" style="font-size: 14px; font-weight: 700;">Đủ Size 36 - 45</h6>
+                            <small class="text-muted">Hỗ trợ đổi size miễn phí</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ##### HERO SECTION END ##### -->
+
+<!-- ##### CATEGORY SECTION START ##### -->
+<section class="teahouse-section" id="menu-categories">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-subtitle">DANH MỤC NỔI BẬT</span>
+            <h2 class="section-title">KHÁM PHÁ CÁC DÒNG GIÀY THỂ THAO</h2>
+            <p class="section-desc">Từ giày chạy bộ êm ái, giày bóng rổ bám sân đến các dòng sneaker lifestyle dẫn đầu xu hướng đường phố.</p>
+        </div>
+
+        <div class="row justify-content-center">
+            <!-- Category 1: Giày Nike -->
+            <div class="col-12 col-md-4">
+                <a asp-action="Index" asp-controller="HangHoa" asp-route-loai="1000" class="category-card">
+                    <img src="~/Hinh/HangHoa/nike-af1-07.jpg" alt="Giày Nike" onerror="this.src='/Hinh/HangHoa/nike-air-max-90.jpg';" />
+                    <div class="category-overlay">
+                        <span class="category-badge">BÁN CHẠY</span>
+                        <h3 class="category-name">Giày Nike</h3>
+                        <span class="category-link-text">Khám phá ngay <i class="fa fa-arrow-right"></i></span>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Category 2: Giày Adidas -->
+            <div class="col-12 col-md-4">
+                <a asp-action="Index" asp-controller="HangHoa" asp-route-loai="1001" class="category-card">
+                    <img src="~/Hinh/HangHoa/adidas-samba-og.jpg" alt="Giày Adidas" onerror="this.src='/Hinh/HangHoa/adidas-gazelle.jpg';" />
+                    <div class="category-overlay">
+                        <span class="category-badge">XU HƯỚNG</span>
+                        <h3 class="category-name">Giày Adidas</h3>
+                        <span class="category-link-text">Khám phá ngay <i class="fa fa-arrow-right"></i></span>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Category 3: Giày chạy bộ -->
+            <div class="col-12 col-md-4">
+                <a asp-action="Index" asp-controller="HangHoa" asp-route-loai="1009" class="category-card">
+                    <img src="~/Hinh/HangHoa/nike-pegasus.jpg" alt="Giày chạy bộ" onerror="this.src='/Hinh/HangHoa/adidas-ultraboost.jpg';" />
+                    <div class="category-overlay">
+                        <span class="category-badge">RUNNING</span>
+                        <h3 class="category-name">Giày chạy bộ</h3>
+                        <span class="category-link-text">Khám phá ngay <i class="fa fa-arrow-right"></i></span>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Category 4: Giày bóng rổ -->
+            <div class="col-12 col-md-4">
+                <a asp-action="Index" asp-controller="HangHoa" asp-route-loai="1010" class="category-card" style="height: 290px;">
+                    <img src="~/Hinh/HangHoa/nike-jordan-1-low.jpg" alt="Giày bóng rổ" onerror="this.src='/Hinh/HangHoa/nike-lebron-21.jpg';" />
+                    <div class="category-overlay">
+                        <span class="category-badge">BASKETBALL</span>
+                        <h3 class="category-name">Giày bóng rổ</h3>
+                        <span class="category-link-text">Xem bộ sưu tập <i class="fa fa-arrow-right"></i></span>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Category 5: Giày sneaker lifestyle -->
+            <div class="col-12 col-md-4">
+                <a asp-action="Index" asp-controller="HangHoa" asp-route-loai="1011" class="category-card" style="height: 290px;">
+                    <img src="~/Hinh/HangHoa/adidas-campus-00s.jpg" alt="Giày sneaker lifestyle" onerror="this.src='/Hinh/HangHoa/nike-dunk-low.jpg';" />
+                    <div class="category-overlay">
+                        <span class="category-badge">STREETWEAR</span>
+                        <h3 class="category-name">Giày sneaker lifestyle</h3>
+                        <span class="category-link-text">Xem bộ sưu tập <i class="fa fa-arrow-right"></i></span>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Category 6: Giày thời trang -->
+            <div class="col-12 col-md-4">
+                <a asp-action="Index" asp-controller="HangHoa" asp-route-gioitinh="Unisex" class="category-card" style="height: 290px;">
+                    <img src="~/Hinh/HangHoa/nb-9060.jpg" alt="Giày thời trang" onerror="this.src='/Hinh/HangHoa/nb-530.jpg';" />
+                    <div class="category-overlay">
+                        <span class="category-badge">MỚI</span>
+                        <h3 class="category-name">Giày thời trang</h3>
+                        <span class="category-link-text">Xem bộ sưu tập <i class="fa fa-arrow-right"></i></span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ##### CATEGORY SECTION END ##### -->
+
+<!-- ##### POPULAR PRODUCTS SECTION START ##### -->
+<section class="teahouse-section" style="background-color: #F1F5F9;">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-subtitle">ĐƯỢC SĂN ĐÓN NHIỀU NHẤT</span>
+            <h2 class="section-title">SẢN PHẨM NỔI BẬT</h2>
+            <p class="section-desc">Những mẫu giày sneaker và giày thể thao bán chạy được khách hàng đánh giá cao nhất.</p>
+        </div>
+    </div>
+    @await Component.InvokeAsync("PopularProducts")
+    <div class="text-center mt-4">
+        <a asp-action="Index" asp-controller="HangHoa" class="btn-teahouse">
+            <i class="fa fa-th-large"></i> XEM TẤT CẢ GIÀY THỂ THAO
+        </a>
+    </div>
+</section>
+<!-- ##### POPULAR PRODUCTS SECTION END ##### -->
+
+<!-- ##### PROMO / COMBO SECTION START ##### -->
+<section class="promo-section" id="promotions">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-subtitle">CHƯƠNG TRÌNH KHUYẾN MÃI HÔM NAY</span>
+            <h2 class="section-title">ƯU ĐÃI SNEAKER – SĂN DEAL CỰC CHẤT</h2>
+            <p class="section-desc">Cơ hội sở hữu những đôi giày thể thao yêu thích từ Nike, Adidas, New Balance với mức giảm giá hấp dẫn.</p>
+        </div>
+
+        <div class="row g-4">
+            <!-- Promo 1 -->
+            <div class="col-12 col-md-4 mb-4">
+                <div class="combo-card">
+                    <span class="combo-tag">GIẢM ĐẾN 500.000Đ</span>
+                    <h3 class="combo-title">BST GIÀY CHẠY BỘ PRO</h3>
+                    <p class="combo-desc">Ưu đãi đặc biệt cho các dòng Nike Pegasus 41, Adidas Ultraboost Light và Asics GEL-Kayano 30.</p>
+                    <div class="combo-deal-box">
+                        <div>
+                            <span class="combo-save">Từ 3.300.000đ</span>
+                            <small class="text-muted d-block"><strike>3.820.000đ</strike></small>
+                        </div>
+                        <a asp-action="Index" asp-controller="HangHoa" asp-route-loai="1009" class="btn-teahouse-peach">
+                            XEM NGAY
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Promo 2 -->
+            <div class="col-12 col-md-4 mb-4">
+                <div class="combo-card" style="border-color: #FF4D2D;">
+                    <span class="combo-tag" style="background:#FFF1F0; color:#FF4D2D;">COMBO ĐÔI COUPLE</span>
+                    <h3 class="combo-title">SNEAKER LIFESTYLE NAM & NỮ</h3>
+                    <p class="combo-desc">Mua 2 đôi Nike Air Force 1, Dunk Low hoặc Adidas Samba OG nhận ngay ưu đãi giảm thêm 300.000đ.</p>
+                    <div class="combo-deal-box">
+                        <div>
+                            <span class="combo-save">Từ 2.720.000đ</span>
+                            <small class="text-muted d-block"><strike>2.920.000đ</strike></small>
+                        </div>
+                        <a asp-action="Index" asp-controller="HangHoa" asp-route-loai="1011" class="btn-teahouse-peach">
+                            CHỌN SIZE
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Promo 3 -->
+            <div class="col-12 col-md-4 mb-4">
+                <div class="combo-card">
+                    <span class="combo-tag">BACK TO SCHOOL</span>
+                    <h3 class="combo-title">CONVERSE & VANS CLASSIC</h3>
+                    <p class="combo-desc">Ưu đãi dành cho học sinh - sinh viên khi mua Converse Chuck 70, Chuck Taylor và Vans Old Skool.</p>
+                    <div class="combo-deal-box">
+                        <div>
+                            <span class="combo-save">Chỉ từ 1.550.000đ</span>
+                            <small class="text-muted d-block">Miễn phí giao hàng toàn quốc</small>
+                        </div>
+                        <a asp-action="Index" asp-controller="HangHoa" asp-route-loai="1004" class="btn-teahouse-peach">
+                            SĂN ƯU ĐÃI
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ##### PROMO / COMBO SECTION END ##### -->
+
+<!-- ##### TOP BRANDS SHOWCASE SECTION START ##### -->
+<section class="teahouse-section">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-subtitle">THƯƠNG HIỆU HÀNG ĐẦU</span>
+            <h2 class="section-title">CÁC DÒNG GIÀY ĐƯỢC YÊU THÍCH</h2>
+            <p class="section-desc">Đa dạng kiểu dáng từ Nike, Adidas, Puma, New Balance, Converse, Vans và Asics.</p>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-6 col-sm-4 col-md-3 col-lg-3 mb-4">
+                <a asp-action="Index" asp-controller="HangHoa" asp-route-loai="1000" class="topping-card d-block">
+                    <img src="~/Hinh/HangHoa/nike-af1-07.jpg" alt="Nike Air Force 1" class="topping-img-circle" onerror="this.src='/Hinh/HangHoa/nike-dunk-low.jpg';" />
+                    <h5 class="topping-name">Nike Air Force 1 '07</h5>
+                    <div class="topping-price">2.720.000đ</div>
+                </a>
+            </div>
+
+            <div class="col-6 col-sm-4 col-md-3 col-lg-3 mb-4">
+                <a asp-action="Index" asp-controller="HangHoa" asp-route-loai="1001" class="topping-card d-block">
+                    <img src="~/Hinh/HangHoa/adidas-samba-og.jpg" alt="Adidas Samba OG" class="topping-img-circle" onerror="this.src='/Hinh/HangHoa/adidas-gazelle.jpg';" />
+                    <h5 class="topping-name">Adidas Samba OG</h5>
+                    <div class="topping-price">3.000.000đ</div>
+                </a>
+            </div>
+
+            <div class="col-6 col-sm-4 col-md-3 col-lg-3 mb-4">
+                <a asp-action="Index" asp-controller="HangHoa" asp-route-loai="1003" class="topping-card d-block">
+                    <img src="~/Hinh/HangHoa/nb-530.jpg" alt="New Balance 530" class="topping-img-circle" onerror="this.src='/Hinh/HangHoa/nb-574.jpg';" />
+                    <h5 class="topping-name">New Balance 530</h5>
+                    <div class="topping-price">2.750.000đ</div>
+                </a>
+            </div>
+
+            <div class="col-6 col-sm-4 col-md-3 col-lg-3 mb-4">
+                <a asp-action="Index" asp-controller="HangHoa" asp-route-loai="1002" class="topping-card d-block">
+                    <img src="~/Hinh/HangHoa/puma-suede-classic.jpg" alt="Puma Suede Classic" class="topping-img-circle" onerror="this.src='/Hinh/HangHoa/puma-rs-x.jpg';" />
+                    <h5 class="topping-name">Puma Suede Classic</h5>
+                    <div class="topping-price">2.090.000đ</div>
+                </a>
+            </div>
+
+            <div class="col-6 col-sm-4 col-md-3 col-lg-3 mb-4">
+                <a asp-action="Index" asp-controller="HangHoa" asp-route-loai="1004" class="topping-card d-block">
+                    <img src="~/Hinh/HangHoa/converse-chuck-70.jpg" alt="Converse Chuck 70" class="topping-img-circle" onerror="this.src='/Hinh/HangHoa/converse-chuck-taylor.jpg';" />
+                    <h5 class="topping-name">Converse Chuck 70</h5>
+                    <div class="topping-price">2.200.000đ</div>
+                </a>
+            </div>
+
+            <div class="col-6 col-sm-4 col-md-3 col-lg-3 mb-4">
+                <a asp-action="Index" asp-controller="HangHoa" asp-route-loai="1005" class="topping-card d-block">
+                    <img src="~/Hinh/HangHoa/vans-old-skool.jpg" alt="Vans Old Skool" class="topping-img-circle" onerror="this.src='/Hinh/HangHoa/converse-chuck-taylor.jpg';" />
+                    <h5 class="topping-name">Vans Old Skool</h5>
+                    <div class="topping-price">1.700.000đ</div>
+                </a>
+            </div>
+
+            <div class="col-6 col-sm-4 col-md-3 col-lg-3 mb-4">
+                <a asp-action="Index" asp-controller="HangHoa" asp-route-loai="1008" class="topping-card d-block">
+                    <img src="~/Hinh/HangHoa/asics-gel-kayano.jpg" alt="Asics GEL-Kayano 30" class="topping-img-circle" onerror="this.src='/Hinh/HangHoa/asics-gel-nimbus.jpg';" />
+                    <h5 class="topping-name">Asics GEL-Kayano 30</h5>
+                    <div class="topping-price">4.090.000đ</div>
+                </a>
+            </div>
+
+            <div class="col-6 col-sm-4 col-md-3 col-lg-3 mb-4">
+                <a asp-action="Index" asp-controller="HangHoa" asp-route-loai="1010" class="topping-card d-block">
+                    <img src="~/Hinh/HangHoa/nike-jordan-1-low.jpg" alt="Nike Air Jordan 1 Low" class="topping-img-circle" onerror="this.src='/Hinh/HangHoa/nike-lebron-21.jpg';" />
+                    <h5 class="topping-name">Air Jordan 1 Low</h5>
+                    <div class="topping-price">3.190.000đ</div>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ##### TOP BRANDS SHOWCASE SECTION END ##### -->
+
+<!-- ##### COMMITMENT / FEATURES SECTION ##### -->
+<section class="teahouse-section" style="background: #FFFFFF; border-top: 1px solid var(--border-soft);">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-md-3 text-center mb-4">
+                <div style="width: 70px; height: 70px; border-radius: 50%; background: #DCFCE7; color: #16A34A; display: inline-flex; align-items: center; justify-content: center; font-size: 28px; margin-bottom: 16px;">
+                    <i class="fa fa-check-circle"></i>
+                </div>
+                <h5 style="font-weight: 700; margin-bottom: 8px;">Cam Kết Chất Lượng</h5>
+                <p class="text-muted small">Giày thể thao tuyển chọn kỹ lưỡng, đầy đủ hộp, tem nhãn và phụ kiện đi kèm.</p>
+            </div>
+
+            <div class="col-12 col-md-3 text-center mb-4">
+                <div style="width: 70px; height: 70px; border-radius: 50%; background: #FFF1F0; color: #FF4D2D; display: inline-flex; align-items: center; justify-content: center; font-size: 28px; margin-bottom: 16px;">
+                    <i class="fa fa-refresh"></i>
+                </div>
+                <h5 style="font-weight: 700; margin-bottom: 8px;">Đổi Size Trong 30 Ngày</h5>
+                <p class="text-muted small">Hỗ trợ đổi size nhanh chóng nếu mang chật hoặc rộng hoàn toàn miễn phí.</p>
+            </div>
+
+            <div class="col-12 col-md-3 text-center mb-4">
+                <div style="width: 70px; height: 70px; border-radius: 50%; background: #FFF7ED; color: #EA580C; display: inline-flex; align-items: center; justify-content: center; font-size: 28px; margin-bottom: 16px;">
+                    <i class="fa fa-shield"></i>
+                </div>
+                <h5 style="font-weight: 700; margin-bottom: 8px;">Bảo Hành Keo & Đế 12 Tháng</h5>
+                <p class="text-muted small">Chế độ chăm sóc, bảo hành keo chỉ và hỗ trợ vệ sinh giày chuyên nghiệp.</p>
+            </div>
+
+            <div class="col-12 col-md-3 text-center mb-4">
+                <div style="width: 70px; height: 70px; border-radius: 50%; background: #EBF3FA; color: #2563EB; display: inline-flex; align-items: center; justify-content: center; font-size: 28px; margin-bottom: 16px;">
+                    <i class="fa fa-truck"></i>
+                </div>
+                <h5 style="font-weight: 700; margin-bottom: 8px;">Giao Hàng Double-Box</h5>
+                <p class="text-muted small">Đóng gói 2 lớp hộp bảo vệ form giày nguyên vẹn, cho phép kiểm tra trước khi nhận.</p>
+            </div>
+        </div>
+    </div>
+</section>

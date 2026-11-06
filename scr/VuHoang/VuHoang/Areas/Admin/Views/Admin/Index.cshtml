@@ -1,0 +1,123 @@
+@{
+    ViewData["Title"] = "Quản trị hệ thống - Sneaker Store";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+    var topSneakers = ViewBag.TopSneakers as IEnumerable<CakeShop.Data.HangHoa>;
+}
+<!-- Page Heading -->
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Bảng Điều Khiển Quản Trị Giày Thể Thao</h1>
+    <a asp-area="Admin" asp-controller="HangHoa" asp-action="Create" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+        <i class="fas fa-plus fa-sm text-white-50"></i> Thêm Mẫu Giày Mới
+    </a>
+</div>
+
+<!-- Summary Cards Row -->
+<div class="row">
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-primary shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Tổng Mẫu Giày</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">@(ViewBag.TotalProducts ?? 22) sản phẩm</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-running fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-success shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Danh Mục Giày</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">@(ViewBag.TotalCategories ?? 10) danh mục</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-tags fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-info shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Tổng Đơn Hàng</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">@(ViewBag.TotalOrders ?? 0) đơn hàng</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-shopping-cart fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-warning shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Khách Hàng Thành Viên</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">@(ViewBag.TotalCustomers ?? 0) tài khoản</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-users fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Top Selling Sneakers Table -->
+<div class="card shadow mb-4">
+    <div class="card-header py-3 d-flex justify-content-between align-items-center">
+        <h6 class="m-0 font-weight-bold text-primary">Top Sản Phẩm Giày Thể Thao Nổi Bật</h6>
+        <a asp-area="Admin" asp-controller="HangHoa" asp-action="Index" class="btn btn-sm btn-outline-primary">Quản lý tất cả giày</a>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered mb-0">
+                <thead class="thead-light">
+                    <tr>
+                        <th>Mã</th>
+                        <th>Hình ảnh</th>
+                        <th>Tên mẫu giày</th>
+                        <th>Danh mục</th>
+                        <th>Size & Nhóm</th>
+                        <th>Giá bán</th>
+                        <th>Lượt xem</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (topSneakers != null)
+                    {
+                        foreach (var sp in topSneakers)
+                        {
+                            <tr>
+                                <td>#@sp.MaHh</td>
+                                <td>
+                                    <img src="~/Hinh/HangHoa/@sp.Hinh" alt="@sp.TenHh" style="width: 48px; height: 48px; object-fit: cover; border-radius: 6px;" />
+                                </td>
+                                <td class="font-weight-bold">@sp.TenHh</td>
+                                <td>@(sp.MaLoaiNavigation?.TenLoai ?? "Giày Sneaker")</td>
+                                <td>@sp.MoTaDonVi</td>
+                                <td class="text-danger font-weight-bold">@((sp.DonGia - sp.GiamGia).ToString("#,##0"))đ</td>
+                                <td>@sp.SoLanXem</td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

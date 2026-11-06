@@ -1,0 +1,108 @@
+@model CakeShop.ModelsView.LoginVM
+@{
+    ViewData["Title"] = "Đăng nhập Sneaker Store";
+}
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-12 col-lg-10">
+            <div class="row no-gutters rounded overflow-hidden" style="background:#FFFFFF; border: 1px solid var(--border-soft); box-shadow: var(--shadow-lg); border-radius: 24px;">
+                <!-- Left: Banner -->
+                <div class="col-12 col-md-6 d-none d-md-block" style="background: url('/img/bg-img/sneaker-login.jpg') center/cover no-repeat; min-height: 520px; position: relative;">
+                    <div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(17, 24, 39, 0.2) 0%, rgba(17, 24, 39, 0.85) 100%); display: flex; flex-direction: column; justify-content: flex-end; padding: 40px; color: white;">
+                        <span class="badge badge-pill mb-2 px-3 py-1" style="background: var(--brand-peach); color: white; width: fit-content; font-weight: 700;">
+                            WELCOME BACK
+                        </span>
+                        <h2 class="text-white font-weight-bold" style="font-size: 2rem;">CỘNG ĐỒNG SNEAKER STORE</h2>
+                        <p class="text-white-50 mb-0">Đăng nhập tài khoản để lưu size giày cá nhân, theo dõi đơn hàng và nhận ưu đãi thành viên.</p>
+                    </div>
+                </div>
+
+                <!-- Right: Login Form -->
+                <div class="col-12 col-md-6 p-4 p-lg-5 d-flex align-items-center">
+                    <div class="w-100">
+                        <div class="mb-4">
+                            <span class="text-muted small font-weight-bold text-uppercase" style="letter-spacing: 1px;">Thành viên Sneaker Store</span>
+                            <h3 class="font-weight-bold" style="color: var(--brand-brown-dark);">ĐĂNG NHẬP</h3>
+                        </div>
+
+                        <form asp-action="DangNhap" asp-route-returnurl="@ViewBag.ReturnUrl" method="post">
+                            <div class="text-danger small mb-3" asp-validation-summary="All"></div>
+                            <input type="hidden" asp-for="Captcha" />
+
+                            <div class="form-group mb-3">
+                                <label class="font-weight-bold small text-muted">TÊN ĐĂNG NHẬP / EMAIL <span class="text-danger">*</span></label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text bg-light border-right-0"><i class="fa fa-user-o text-muted"></i></span>
+                                    </div>
+                                    <input type="text" asp-for="@Model.UserName" class="form-control border-left-0" placeholder="Tên tài khoản hoặc email" required />
+                                </div>
+                                <span asp-validation-for="@Model.UserName" class="text-danger small"></span>
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <label class="font-weight-bold small text-muted">MẬT KHẨU <span class="text-danger">*</span></label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text bg-light border-right-0"><i class="fa fa-lock text-muted"></i></span>
+                                    </div>
+                                    <input type="password" asp-for="@Model.Password" class="form-control border-left-0" id="password-field" placeholder="Nhập mật khẩu" required />
+                                </div>
+                                <span asp-validation-for="@Model.Password" class="text-danger small"></span>
+                            </div>
+
+                            <div class="d-flex justify-content-between align-items-center mb-4">
+                                <div class="custom-control custom-checkbox">
+                                    <input class="custom-control-input" type="checkbox" id="rememberCheck" />
+                                    <label class="custom-control-label small text-muted" for="rememberCheck">
+                                        Ghi nhớ tài khoản
+                                    </label>
+                                </div>
+                                <a asp-controller="KhachHang" asp-action="QuenMatKhau" class="small font-weight-bold" style="color: var(--brand-peach);">
+                                    Quên mật khẩu?
+                                </a>
+                            </div>
+
+                            <!-- Google reCAPTCHA -->
+                            <div class="mb-4 text-center">
+                                <div class="g-recaptcha d-inline-block" id="recaptcha"></div>
+                            </div>
+
+                            <button type="submit" class="btn-teahouse w-100 py-3 mb-3">
+                                <i class="fa fa-sign-in mr-2"></i> ĐĂNG NHẬP NGAY
+                            </button>
+
+                            <div class="text-center small text-muted">
+                                Bạn chưa có tài khoản?
+                                <a asp-controller="KhachHang" asp-action="DangKy" class="font-weight-bold" style="color: var(--brand-peach);">
+                                    Đăng ký thành viên
+                                </a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer></script>
+    <script>
+        var onloadCallback = function () {
+            grecaptcha.render('recaptcha', {
+                'sitekey': '6LeyNwsqAAAAAOUd8nzWwDKPaBJgXbE-myPpNrzX',
+                'callback': function (response) {
+                    console.log(response);
+                    $('#Captcha').val(response);
+                }
+            });
+        };
+
+        function resetCaptcha() {
+            grecaptcha.reset();
+            $('#Captcha').val('');
+        }
+    </script>
+}

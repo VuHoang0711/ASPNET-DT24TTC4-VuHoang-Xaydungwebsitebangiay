@@ -1,0 +1,37 @@
+@{
+    ViewData["Title"] = "Đặt hàng thành công";
+}
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-8 col-lg-6 text-center">
+            <div class="p-5 rounded" style="background:#FFFFFF; border: 1px solid var(--border-soft); box-shadow: var(--shadow-md); border-radius: 24px;">
+                <div style="width: 80px; height: 80px; border-radius: 50%; background: #DCFCE7; color: #16A34A; display: inline-flex; align-items: center; justify-content: center; font-size: 36px; margin-bottom: 24px;">
+                    <i class="fa fa-check"></i>
+                </div>
+                <span class="badge badge-pill px-3 py-1 mb-2" style="background: var(--brand-peach-soft); color: var(--brand-peach); font-weight: 700;">
+                    ĐÃ TIẾP NHẬN ĐƠN HÀNG
+                </span>
+                <h2 class="font-weight-bold mb-3" style="color: var(--brand-brown-dark);">ĐẶT HÀNG THÀNH CÔNG!</h2>
+                
+                @if (TempData["Message"] != null)
+                {
+                    <div class="alert alert-info py-2 px-3 small">@TempData["Message"]</div>
+                }
+
+                <p class="text-muted mb-4" style="line-height: 1.7;">
+                    Cảm ơn bạn đã mua sắm tại Sneaker Store. Đội ngũ kho vận đang kiểm tra kỹ form giày, đóng gói Double-Box chống móp hộp và giao nhanh tới địa chỉ của bạn.
+                </p>
+
+                <div class="d-flex flex-wrap gap-2 justify-content-center">
+                    <a asp-controller="Cart" asp-action="HistoryBill" class="btn-teahouse mr-2 mb-2">
+                        <i class="fa fa-list-alt mr-1"></i> XEM LỊCH SỬ ĐƠN
+                    </a>
+                    <a asp-controller="HangHoa" asp-action="Index" class="btn-teahouse-outline mb-2">
+                        <i class="fas fa-running mr-1"></i> TIẾP TỤC MUA SẮM
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,83 @@
+@model IEnumerable<CakeShop.ModelsView.MenuLoaiVM>
+
+<!-- 1. DANH MỤC GIÀY -->
+<div class="account-sidebar-nav mb-4" style="background:#FFFFFF; border-radius:16px; padding:20px; border:1px solid var(--border-soft); box-shadow: var(--shadow-sm);">
+    <h5 style="font-weight: 800; font-size: 15px; color: var(--brand-brown-dark); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 14px; padding-bottom: 10px; border-bottom: 2px solid var(--border-soft);">
+        <i class="fas fa-running text-danger mr-2"></i> DANH MỤC GIÀY
+    </h5>
+
+    <ul class="list-unstyled mb-0">
+        <li class="mb-2">
+            <a asp-controller="HangHoa" asp-action="Index" class="d-flex align-items-center justify-content-between p-2 rounded" style="color: var(--brand-brown-dark); font-weight: 700; transition: all 0.2s;" onmouseover="this.style.background='#FFF1F0'; this.style.color='#FF4D2D';" onmouseout="this.style.background='transparent'; this.style.color='var(--brand-brown-dark)';">
+                <span><i class="fa fa-th-large mr-2 text-muted"></i> Tất Cả Giày Thể Thao</span>
+                <span class="badge badge-pill badge-light" style="background:var(--bg-cream); color:var(--brand-brown);">ALL</span>
+            </a>
+        </li>
+        @foreach (var item in Model)
+        {
+            <li class="mb-2">
+                <a asp-controller="HangHoa" asp-action="Index" asp-route-loai="@item.MaLoai" class="d-flex align-items-center justify-content-between p-2 rounded" style="color: var(--brand-brown-dark); font-weight: 600; font-size: 14px; transition: all 0.2s;" onmouseover="this.style.background='#FFF1F0'; this.style.color='#FF4D2D';" onmouseout="this.style.background='transparent'; this.style.color='var(--brand-brown-dark)';">
+                    <span><i class="fa fa-angle-right mr-2" style="color: #FF4D2D;"></i> @item.TenLoai</span>
+                    <span class="badge badge-pill badge-light" style="background:var(--bg-cream); color:var(--brand-brown);">@item.SoLuong</span>
+                </a>
+            </li>
+        }
+    </ul>
+</div>
+
+<!-- 2. LỌC THEO GIỚI TÍNH & TRẠNG THÁI -->
+<div class="account-sidebar-nav mb-4" style="background:#FFFFFF; border-radius:16px; padding:20px; border:1px solid var(--border-soft); box-shadow: var(--shadow-sm);">
+    <h5 style="font-weight: 800; font-size: 15px; color: var(--brand-brown-dark); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 14px; padding-bottom: 10px; border-bottom: 2px solid var(--border-soft);">
+        <i class="fa fa-filter text-danger mr-2"></i> BỘ LỌC NHANH
+    </h5>
+
+    <div class="mb-3">
+        <small class="font-weight-bold text-muted d-block mb-2">NHÓM NGƯỜI DÙNG:</small>
+        <div class="d-flex flex-wrap" style="gap: 6px;">
+            <a asp-controller="HangHoa" asp-action="Index" asp-route-gioitinh="Nam" class="badge badge-light px-3 py-2 border" style="font-size: 12px;">Giày Nam</a>
+            <a asp-controller="HangHoa" asp-action="Index" asp-route-gioitinh="Nu" class="badge badge-light px-3 py-2 border" style="font-size: 12px;">Giày Nữ</a>
+            <a asp-controller="HangHoa" asp-action="Index" asp-route-gioitinh="Unisex" class="badge badge-light px-3 py-2 border" style="font-size: 12px;">Unisex</a>
+        </div>
+    </div>
+
+    <div class="mb-3">
+        <small class="font-weight-bold text-muted d-block mb-2">KHOẢNG GIÁ:</small>
+        <ul class="list-unstyled small mb-0">
+            <li class="mb-1"><a asp-controller="HangHoa" asp-action="Index" asp-route-mucgia="duoi-2tr"><i class="fa fa-circle-o mr-2 text-danger"></i> Dưới 2.000.000đ</a></li>
+            <li class="mb-1"><a asp-controller="HangHoa" asp-action="Index" asp-route-mucgia="2tr-3tr"><i class="fa fa-circle-o mr-2 text-danger"></i> 2.000.000đ - 3.000.000đ</a></li>
+            <li class="mb-1"><a asp-controller="HangHoa" asp-action="Index" asp-route-mucgia="3tr-4tr"><i class="fa fa-circle-o mr-2 text-danger"></i> 3.000.000đ - 4.000.000đ</a></li>
+            <li class="mb-1"><a asp-controller="HangHoa" asp-action="Index" asp-route-mucgia="tren-4tr"><i class="fa fa-circle-o mr-2 text-danger"></i> Trên 4.000.000đ</a></li>
+        </ul>
+    </div>
+
+    <div class="mb-3">
+        <small class="font-weight-bold text-muted d-block mb-2">SIZE GIÀY PHỔ BIẾN:</small>
+        <div class="d-flex flex-wrap" style="gap: 5px;">
+            @foreach (var s in new[] { "36", "37", "38", "39", "40", "41", "42", "43", "44", "45" })
+            {
+                <a asp-controller="HangHoa" asp-action="Index" asp-route-size="@s" class="badge badge-light border px-2 py-1" style="font-size: 12px;">@s</a>
+            }
+        </div>
+    </div>
+
+    <div>
+        <small class="font-weight-bold text-muted d-block mb-2">TRẠNG THÁI:</small>
+        <div class="d-flex flex-wrap" style="gap: 6px;">
+            <a asp-controller="HangHoa" asp-action="Index" asp-route-trangthai="moi" class="badge badge-info px-2 py-1">Hàng mới</a>
+            <a asp-controller="HangHoa" asp-action="Index" asp-route-trangthai="banchay" class="badge badge-warning px-2 py-1">Bán chạy</a>
+            <a asp-controller="HangHoa" asp-action="Index" asp-route-trangthai="khuyenmai" class="badge badge-danger px-2 py-1">Đang giảm giá</a>
+        </div>
+    </div>
+</div>
+
+<!-- Promo mini card in sidebar -->
+<div class="p-3 text-center rounded" style="background: linear-gradient(135deg, #FFF1F0 0%, #FFF7ED 100%); border: 1.5px dashed var(--brand-peach); border-radius: 16px;">
+    <div style="font-size: 24px; color: var(--brand-peach); margin-bottom: 6px;">
+        <i class="fa fa-ticket"></i>
+    </div>
+    <h6 style="font-weight: 800; color: var(--brand-brown-dark); font-size: 14px;">MÃ: SNEAKER200</h6>
+    <p class="small text-muted mb-2">Giảm thêm 200k cho đơn hàng giày thể thao đầu tiên</p>
+    <a asp-action="Index" asp-controller="HangHoa" asp-route-trangthai="khuyenmai" class="btn btn-sm btn-teahouse-peach py-1 px-3" style="font-size: 11px;">
+        SĂN DEAL NGAY
+    </a>
+</div>
